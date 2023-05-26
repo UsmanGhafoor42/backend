@@ -11,18 +11,6 @@ const authRoute = require("./routes/auth");
 
 dotenv.config();
 
-// const connectToMongo = async () => {
-//     try {
-//       mongoose.set("strictQuery", false);
-//       mongoose.connect(process.env.MONGO_URL);
-//       console.log("Connected to Mongo Successfully!");
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-//   connectToMongo();
-
-
 //Connecting to MongoDb (returns a promise use .then or asyn/await)
 const uri = "mongodb://127.0.0.1:27017/usman";
 mongoose.set("strictQuery", true);

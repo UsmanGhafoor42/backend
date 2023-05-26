@@ -79,9 +79,12 @@ const { userName, userEmail, userPassword } = req.body;
 //refresh token 
 
 router.route('/login').post(async (req, res) => {
-    try {
-      const { userEmail, userPassword } = req.body;
+  const { userEmail, userPassword } = req.body;
   
+    try {
+      
+      
+      
       const userdata = await User.findOne({ userEmail: userEmail });
       if (!userdata) {
         return res.status(404).json("User Not Found!");
@@ -96,11 +99,15 @@ router.route('/login').post(async (req, res) => {
   
       
       /////TOKEN GENERATION
-      const useremail = userEmail;
-    const user = { email: useremail }
+      // const useremail = userEmail;
+    const user = { email:userdata.userEmail,id:userdata._id }
     const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
-    res.json({ accessToken: accessToken })
-    //res.status(200).json("Login Successful");
+    // req.userId = accessToken.id;
+    
+    //res.json({ accessToken: accessToken })
+    res.status(200).json(`Login Successful
+          accesToken: ${accessToken}`);
+          console.log(userdata._id);
     } catch (err) {
       res.status(400).json('Error: ' + err);
     }
